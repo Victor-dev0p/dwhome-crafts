@@ -21,8 +21,8 @@ const Footer = () => {
       url: "/about",
     },
     {
-      text: "Properties",
-      url: "/properties",
+      text: "Projects",
+      url: "/projects",
     },
     {
       text: "Contact",
@@ -82,7 +82,7 @@ const Footer = () => {
                 </span>
               </Link>
               <Link
-                href={"mailto:brooklynandbronxco@gmail.com"}
+                href={"mailto:dwhomecrafts@gmail.com"}
                 className="flex items-center gap-3 group w-fit"
               >
                 <FaEnvelope className="text-green-800" />
@@ -106,7 +106,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-center md:text-left max-md:text-sm">
-              &copy; {new Date().getFullYear()} Brooklyn & Bronx. All rights reserved.
+              &copy; {new Date().getFullYear()} DWHome & Crafts. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-gray-400 hover:text-green-500 transition-colors">
