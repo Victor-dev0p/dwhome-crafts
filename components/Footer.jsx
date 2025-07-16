@@ -30,7 +30,7 @@ const Footer = () => {
     },
     {
       text: "Admin",
-      url: "/auth/signin",
+      url: "/admin",
     },
   ];
   return (
