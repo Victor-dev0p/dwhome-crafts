@@ -128,7 +128,7 @@ const page = () => {
             <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Space?</h2>
             <p className="mb-6">Let’s create something beautiful together.</p>
             <button className="bg-white text-green-800 px-6 py-3 rounded-md font-semibold">
-                Get a Free Quote
+              Get a Free Quote
             </button>
         </section>
 

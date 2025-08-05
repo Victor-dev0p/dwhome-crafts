@@ -1,20 +1,11 @@
-// app/admin/page.jsx
-import { auth } from "@/auth";
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
-const AdminDashboard = async () => {
-  const session = await auth();
-  console.log("Admin session:", session);
-
-  return (
-    <main className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Welcome Admin</h1>
-      {session && session.user?.name ? (
-        <p className="text-gray-700">You are logged in as: {session.user.name}</p>
-      ) : (
-        <p>You are not authorized</p>
-      )}
-    </main>
-  );
-};
-
-export default AdminDashboard;
+export default async function AdminPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect('/admin/signin');
+  }
+  redirect('/admin/dashboard');
+}

@@ -17,11 +17,18 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-[#555]">
             Handmade pieces that elevate your home’s beauty and comfort.
           </p>
-          <Link href="/collection">
-            <button className="bg-[#143c2d] text-white px-8 py-3 rounded-md hover:bg-[#0f2e22] transition duration-300">
-              View Collection
-            </button>
-          </Link>
+          <p className="gap-5">
+            <Link href="/quote">
+              <button className="bg-[#143c2d] text-white px-8 py-3 rounded-md hover:bg-[#0f2e22] transition duration-300">
+                View Collection
+              </button>
+            </Link>
+            <Link href="/quote">
+              <button className="bg-[#143c2d] text-white px-8 py-3 rounded-md hover:bg-[#0f2e22] transition duration-300">
+               Get a Quote
+              </button>
+            </Link>
+          </p>
         </div>
 
         {/* Right Image */}
