@@ -25,27 +25,27 @@ export default async function ProjectGallery() {
 
   const localProjects = [
     {
-      image: "/projects/Froom.jpg",
+      image: "/Nproj/ClassyL4.jpg",
       description: "Contemporary building showcasing modern architectural design",
     },
     {
-      image: "/projects/FullyFk.jpg",
+      image: "/Nproj/LVChairSet2.jpg",
       description: "Elegantly designed living space with modern furnishings",
     },
     {
-      image: "/projects/Hero4.jpg",
+      image: "/Nproj/Pbed2.jpg",
       description: "Spacious commercial kitchen featuring efficient layout",
     },
     {
-      image: "/projects/Kitchen.jpg",
+      image: "/Nproj/Kitchen.jpg",
       description: "Comfortable reception area designed for relaxation",
     },
     {
-      image: "/projects/Hero6.jpg",
+      image: "/Nproj/Pjs.jpg",
       description: "Luxurious master bedroom with premium furnishings",
     },
     {
-      image: "/projects/OfficeF.jpg",
+      image: "/Nproj/Pjs1.jpg",
       description: "Landscaped pathway through residential grounds",
     },
     {
@@ -53,7 +53,7 @@ export default async function ProjectGallery() {
       description: "Sleek duplex design with modern amenities",
     },
     {
-      image: "/projects/JpTvConsole.jpg",
+      image: "/Nproj/JpTvConsole.jpg",
       description: "Stylishly decorated bedroom with attention to detail",
     },
     {
@@ -61,19 +61,23 @@ export default async function ProjectGallery() {
       description: "Multi-purpose space combining parking and fitness area",
     },
     {
-      image: "/projects/p19.jpg",
+      image: "/Nproj/Pjs5.jpg",
       description: "Contemporary living room with elegant furnishings",
     },
     {
-      image: "/projects/p20.jpg",
+      image: "/Nproj/Pjs6.jpg",
       description: "Striking duplex exterior with modern architecture",
     },
     {
-      image: "/projects/p23.jpg",
+      image: "/Nproj/Plounge1.jpg",
       description: "Inviting outdoor dining space",
     },
     {
-      image: "/projects/p30.jpg",
+      image: "/Nproj/ClassyL2.jpg",
+      description: "Professional office space with contemporary design",
+    },
+    {
+      image: "/Nproj/ClassyL2.jpg",
       description: "Professional office space with contemporary design",
     },
   ];
@@ -97,7 +101,7 @@ export default async function ProjectGallery() {
                 width={500}
                 height={500}
                 src={project._id ? `/api/project/${project._id}` : project.image}
-                alt={`bandbproject ${i + 1}`}
+                alt={`dwhcproject ${i + 1}`}
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gray-900/0 group-hover:bg-gray-900/70 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">

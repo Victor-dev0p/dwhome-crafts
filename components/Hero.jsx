@@ -17,9 +17,22 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-[#555]">
             Handmade pieces that elevate your home’s beauty and comfort.
           </p>
-          <p className="gap-5">
-            <Link href="/quote">
-              <button className="bg-[#143c2d] text-white px-8 py-3 rounded-md hover:bg-[#0f2e22] transition duration-300">
+          <p className="flex gap-4">
+            <Link href="#featured-collection" scroll={true}>
+              <button  
+                onClick={() => {
+                  const h3 = document.getElementById("featured-collection");
+                  if (h3) {
+                    const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
+                    const h3Top =
+                      h3.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                    window.scrollTo({
+                      top: h3Top,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+              className="bg-[#143c2d] text-white px-8 py-3 rounded-md hover:bg-[#0f2e22] transition duration-300">
                 View Collection
               </button>
             </Link>

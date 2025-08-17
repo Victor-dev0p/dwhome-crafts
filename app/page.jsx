@@ -1,3 +1,4 @@
+// app/page.jsx
 "use client"
 import { useState, useEffect } from "react";
 import Hero from "@/components/Hero";
@@ -6,6 +7,7 @@ import Link from "next/link";
 import { FiArrowUp } from "react-icons/fi";
 import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
+import Stats from "@/components/Stats";
 
 const page = () => {
  const [showTopBtn, setShowTopBtn] = useState(false);
@@ -66,33 +68,7 @@ const page = () => {
           </motion.div>
 
           {/* Stats Section */}
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="bg-gray-800 rounded-2xl p-8"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-white"
-                >
-                  <div className="text-3xl md:text-4xl font-bold text-green-800 mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-sm md:text-base text-gray-300">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <Stats stats={stats} />
         </div>
       </section>
 
@@ -100,7 +76,7 @@ const page = () => {
       <Portfolio />
 
        {/* Contact CTA Section */}
-      <section className="bg-[url('/fp.jpg')] bg-no-repeat bg-center bg-cover bg-fixed min-h-[60]">
+      <section className="bg-[url('/ads/cta.jpg')] bg-no-repeat bg-center bg-cover bg-fixed min-h-[60]">
         <div className="min-h-[60] bg-black/80 lg:p-20 md:p-10 p-10">
           <div className="space-y-10 max-w-2xl">
             <h2 className="md:text-4xl lg:text-5xl text-2xl font-bold text-white">
@@ -136,7 +112,7 @@ const page = () => {
        {showTopBtn && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded-full shadow-lg transition-all"
+          className="fixed bottom-6 right-6 z-50 bg-[#143c2d] hover:bg-[#71C0BB] text-white p-3 rounded-full shadow-lg transition-all"
           aria-label="Back to top"
         >
           <FiArrowUp size={24} />

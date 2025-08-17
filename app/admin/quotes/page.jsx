@@ -1,71 +1,20 @@
-// app/admin/quote/page.jsx
-'use client';
-
-import { useState } from 'react';
 import { connectToDB } from '@/lib/mongodb';
 import Quote from '@/lib/models/Quote';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import QuotesList from './QuotesList';
 
 export const dynamic = 'force-dynamic';
 
-const currencySymbols = {
-  NGN: '₦',
-  USD: '$',
-};
-
-// SSR for quotes
 export default async function AdminQuotesPage() {
   await connectToDB();
   const quotes = await Quote.find().sort({ createdAt: -1 }).lean();
 
-  return <QuotesList quotes={quotes} />;
-}
+  // Convert Mongo ObjectId and Date to strings
+  const serializedQuotes = quotes.map(q => ({
+    ...q,
+    _id: q._id.toString(),
+    createdAt: q.createdAt?.toISOString() || null,
+    updatedAt: q.updatedAt?.toISOString() || null,
+  }));
 
-// Client Component
-function QuotesList({ quotes }) {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleIndex = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  return (
-    <div className="min-h-screen p-6">
-      <h1 className="text-3xl font-bold mb-6">Submitted Quotes</h1>
-      <div className="space-y-4">
-        {quotes.length === 0 && <p>No quotes yet.</p>}
-        {quotes.map((quote, i) => (
-          <div key={quote._id} className="bg-white dark:bg-zinc-900 rounded-lg shadow border">
-            <button
-              onClick={() => toggleIndex(i)}
-              className="w-full flex justify-between items-center px-4 py-3 text-left font-medium hover:bg-gray-100 dark:hover:bg-zinc-800 transition"
-            >
-              <div>
-                <p className="font-semibold">{quote.name || '—'}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{quote.email}</p>
-                <p className="text-sm">
-                  {quote.currency && quote.budgetRaw
-                    ? `${currencySymbols[quote.currency] || ''}${(+quote.budgetRaw).toLocaleString()}`
-                    : '—'}
-                </p>
-              </div>
-              {openIndex === i ? <ChevronUp /> : <ChevronDown />}
-            </button>
-
-            {openIndex === i && (
-              <div className="border-t px-4 py-3 space-y-2 text-sm text-gray-800 dark:text-gray-200">
-                <p><strong>Service:</strong> {quote.service || '—'}</p>
-                <p><strong>Project Details:</strong> {quote.projectDetails || '—'}</p>
-                <p><strong>Message:</strong> {quote.message || '—'}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  <strong>Submitted:</strong>{' '}
-                  {quote.createdAt ? new Date(quote.createdAt).toLocaleString() : '—'}
-                </p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return <QuotesList quotes={serializedQuotes} />;
 }

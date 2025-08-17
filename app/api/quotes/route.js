@@ -116,13 +116,13 @@ export async function POST(request) {
 
     // Client Confirmation Email
     await transporter.sendMail({
-      from: `"Brooklyn & Bronx" <${process.env.EMAIL_USER}>`,
+      from: `" DwHome & Crafts" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: 'Quote Received',
       html: `
         <p>Hi ${name},</p>
         <p>Thank you for reaching out about your <strong>${service}</strong> project. We’ve received your request and will get back to you shortly.</p>
-        <p>– Brooklyn & Bronx</p>
+        <p>– DwHome & Crafts</p>
       `,
     });
 
