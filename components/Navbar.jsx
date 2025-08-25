@@ -1,59 +1,68 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { CiMenuFries } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navItems = [
     { label: "Home", link: "/" },
     { label: "About Us", link: "/about" },
-    { label: "Contact ", link: "/contact" },
-    { label: "Projects ", link: "/projects" },
-    { label: "Blog ", link: "/blogs"},
+    { label: "Contact", link: "/contact" },
+    { label: "Projects", link: "/projects" },
+    { label: "Blog", link: "/blogs" },
   ];
 
   return (
-<nav className="sticky top-0 left-0 w-full bg-white md:px-10 px-4 lg:h-[13vh] py-2 flex items-center justify-between z-50 shadow-md">
+    <nav className="sticky top-0 left-0 w-full bg-white md:px-10 px-4 lg:h-[13vh] py-2 flex items-center justify-between z-50 shadow-md">
       {/* Logo */}
-      <Image
-        src="/LG.png"
-        alt="Logo"
-        width={70}
-        height={70}
-      />
+      <Image src="/LG.png" alt="Logo" width={70} height={70} />
 
-      <div
-        className={`flex items-center gap-5 lg:static lg:flex-row lg:w-auto lg:h-auto lg:bg-transparent max-lg:fixed max-lg:top-0 max-lg:right-0 max-lg:flex-col max-lg:items-center max-lg:pt-24 max-lg:gap-20 max-lg:w-full max-lg:h-full max-lg:bg-white text-gray-800 max-lg:py-10 max-lg:px-6 transition-transform duration-300 ${
-          navOpen ? "max-lg:translate-x-0 z-20" : "max-lg:translate-x-full"
-        }`}
-      >
-        {navItems.map((item, index) => {
-            const isQuote = item.label.trim() === "Get a Quote";
-            const isActive = pathname === item.link && !isQuote;
+      {/* Overlay (blur background on mobile) */}
+      {mounted && navOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30 transition-opacity duration-300"
+          onClick={() => setNavOpen(false)}
+        />
+      )}
 
+      {/* Nav Drawer */}
+      {mounted && (
+        <div
+          className={`fixed top-0 left-0 h-full w-3/4 max-w-xs bg-white shadow-lg transform transition-transform duration-300 ease-in-out 
+            flex flex-col items-start pt-24 px-6 gap-6
+            ${navOpen ? "translate-x-0 z-40" : "-translate-x-full"}
+            lg:static lg:flex-row lg:translate-x-0 lg:w-auto lg:h-auto lg:bg-transparent lg:shadow-none lg:pt-0 lg:px-0 lg:gap-5`}
+        >
+          {navItems.map((item, index) => {
+            const isActive = pathname === item.link;
             return (
-                <Link
-                    key={index}
-                    href={item.link}
-                    className={`text-base px-2 transition-colors duration-200 ${
-                    isQuote
-                    ? "px-3 py-1 border text-gray-800 border-gray-800 hover:bg-green-700 hover:text-white hover:border-green-700"
-                    : `text-gray-800 hover:text-green-700 ${isActive ? "text-green-700" : ""}`
-                    }`}
-                    onClick={() => setNavOpen(false)}
-                >
-                 {item.label}
-                </Link>
-             );
-        })}
-      </div>
+              <Link
+                key={index}
+                href={item.link}
+                className={`text-base px-2 transition-colors duration-200 ${
+                  isActive ? "text-green-700" : "text-gray-800 hover:text-green-700"
+                }`}
+                onClick={() => setNavOpen(false)}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
 
+      {/* Hamburger Button */}
       <button
         onClick={() => setNavOpen(!navOpen)}
         className="text-3xl lg:hidden z-50 text-gray-900"

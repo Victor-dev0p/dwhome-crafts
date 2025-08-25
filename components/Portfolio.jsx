@@ -22,9 +22,9 @@ const Portfolio = () => {
       category: "offices",
       location: "Berger, Abuja",
       duration: "2 months",
-      scope: "Complete construction of 12-unit luxury villa complex",
-      challenges: "Waterfront construction, high-end finishes, tight timeline",
-      results: "Delivered 2 weeks ahead of schedule, 100% occupancy within 3 months",
+      scope: "",
+      challenges: "",
+      results: "",
       images: [
         "/BCR1.jpg",
         "/BCR.jpg",
@@ -39,9 +39,9 @@ const Portfolio = () => {
       category: "residential",
       location: "Abuja CBD",
       duration: "24 months",
-      scope: "15-story commercial building with smart systems",
-      challenges: "Complex MEP integration, LEED certification requirements",
-      results: "LEED Gold certified, 95% pre-leasing before completion",
+      scope: "",
+      challenges: "",
+      results: "",
       images: [
         "/FullyFH.jpg",
         "/KF.jpg",
@@ -56,9 +56,9 @@ const Portfolio = () => {
       category: "renovation",
       location: "Ikoyi, Lagos",
       duration: "8 months",
-      scope: "Complete restoration of 1960s colonial mansion",
-      challenges: "Preserving historical elements, structural upgrades",
-      results: "Award-winning restoration, featured in Architectural Digest",
+      scope: "",
+      challenges: "",
+      results: "",
       images: [
         "/JpTvLight.jpg",
         "/Josefbed.jpg",
@@ -73,9 +73,9 @@ const Portfolio = () => {
       category: "commercial",
       location: "Abuja",
       duration: "6 weeks",
-      scope: "200,000 sq ft retail and entertainment complex",
-      challenges: "Large-span structures, integrated technology systems",
-      results: "Regional shopping destination, 150+ retail outlets",
+      scope: "",
+      challenges: "",
+      results: "",
       images: [
         "/RecepF.jpg",
         "/CleanO.jpg",
@@ -90,9 +90,9 @@ const Portfolio = () => {
       category: "hotels",
       location: "Guzape, Abuja",
       duration: "2 months",
-      scope: "45-unit gated residential community",
-      challenges: "Infrastructure development, eco-friendly design",
-      results: "First net-zero energy residential estate in Nigeria",
+      scope: "",
+      challenges: "",
+      results: "",
       images: [
         "/SA.jpg",
         "/SA1.jpg",
@@ -107,9 +107,9 @@ const Portfolio = () => {
       category: "hotels",
       location: "Umuahia, Abia State",
       duration: "4 months",
-      scope: "2.5km cable-stayed bridge construction",
-      challenges: "River crossing, deep foundation work, weather conditions",
-      results: "Reduced travel time by 40%, enhanced regional connectivity",
+      scope: "",
+      challenges: "",
+      results: "",
       images: [
         "/CalicoH.jpg",
         "/turant.png",
@@ -160,7 +160,7 @@ useEffect(() => {
         const max = projects.find(p => p.featured)?.images.length || 1;
         return prev === max - 1 ? 0 : prev + 1;
       });
-    }, 4000); // Change image every 3s
+    }, 4000); // Change image every 4s
 
     return () => clearInterval(interval);
   }
@@ -384,7 +384,7 @@ useEffect(() => {
                       <div>
                         <div className="space-y-4">
                           <div className="flex items-start gap-3">
-                            <FiMapPin className="text-yellow-600 mt-1" size={20} />
+                            <FiMapPin className="text-green-600 mt-1" size={20} />
                             <div>
                               <h4 className="font-semibold text-gray-800">Location</h4>
                               <p className="text-gray-600">{selectedProject.location}</p>
@@ -392,7 +392,7 @@ useEffect(() => {
                           </div>
                           
                           <div className="flex items-start gap-3">
-                            <FiCalendar className="text-yellow-600 mt-1" size={20} />
+                            <FiCalendar className="text-green-600 mt-1" size={20} />
                             <div>
                               <h4 className="font-semibold text-gray-800">Duration</h4>
                               <p className="text-gray-600">{selectedProject.duration}</p>
@@ -400,7 +400,7 @@ useEffect(() => {
                           </div>
                           
                           <div className="flex items-start gap-3">
-                            <FiTool className="text-yellow-600 mt-1" size={20} />
+                            <FiTool className="text-green-600 mt-1" size={20} />
                             <div>
                               <h4 className="font-semibold text-gray-800">Project Scope</h4>
                               <p className="text-gray-600">{selectedProject.scope}</p>
@@ -413,7 +413,7 @@ useEffect(() => {
                         <div className="space-y-4">
                           <div>
                             <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                              <FiTool className="text-yellow-600" size={18} />
+                              <FiTool className="text-green-600" size={18} />
                               Key Challenges
                             </h4>
                             <p className="text-gray-600">{selectedProject.challenges}</p>
@@ -421,7 +421,7 @@ useEffect(() => {
                           
                           <div>
                             <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                              <FiAward className="text-yellow-600" size={18} />
+                              <FiAward className="text-green-600" size={18} />
                               Results & Achievements
                             </h4>
                             <p className="text-gray-600">{selectedProject.results}</p>

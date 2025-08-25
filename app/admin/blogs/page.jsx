@@ -32,7 +32,7 @@ export default function AdminBlogPage() {
     if (!confirm('Are you sure you want to delete this blog?')) return;
 
     try {
-      const res = await fetch(`/api/blog/${id}`, {
+      const res = await fetch(`/api/blogs/${id}`, {
         method: 'DELETE',
       });
       if (!res.ok) throw new Error('Failed to delete blog');
@@ -97,7 +97,7 @@ export default function AdminBlogPage() {
               <div className="flex justify-end gap-2 mt-4">
                 <button
                   onClick={() => handleEdit(blog)}
-                  className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                  className="p-2 bg-green-500 text-white rounded hover:bg-green-600"
                 >
                   <Pencil className="w-4 h-4" />
                 </button>

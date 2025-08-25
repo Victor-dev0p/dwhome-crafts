@@ -44,9 +44,7 @@ export async function PUT(req, { params }) {
 
     let updateData = { title, excerpt, content };
 
-    // ✅ Robust check for image file before processing
     if (imageFile && imageFile instanceof File) {
-      // Ensure the file is not empty
       if (imageFile.size > 0) {
         const buffer = Buffer.from(await imageFile.arrayBuffer());
         updateData.image = {
@@ -54,11 +52,9 @@ export async function PUT(req, { params }) {
           contentType: imageFile.type,
         };
       } else {
-        // If an empty file is sent, explicitly remove the image field
         updateData.image = null;
       }
     } else if (imageFile === 'null' || imageFile === 'undefined') {
-      // This is a common way for frontends to signal image removal
       updateData.image = null;
     }
 
@@ -66,7 +62,7 @@ export async function PUT(req, { params }) {
     const updatedBlog = await Blog.findByIdAndUpdate(
       params.id,
       updateData,
-      { new: true, runValidators: true } // Return the updated document and run schema validators
+      { new: true, runValidators: true }
     ).lean();
 
     if (!updatedBlog) {

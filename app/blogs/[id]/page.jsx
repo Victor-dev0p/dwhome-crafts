@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }) {
       <p style="font-size:1.5rem;color:#D1D5DB;margin:0;">Transform Your Home into a Masterpiece</p>
       <p style="color:#9CA3AF;font-size:0.875rem;margin-top:0.25rem;">Dwhome & Crafts offers premium furniture and bespoke interior designs that blend style, comfort, and functionality—bringing your dream home to life.</p>
       <div style="display:flex;justify-content:flex-end;margin-top:0.5rem;">
-        <a href="https://wa.me/2347087777367" style="min-width:8rem;padding:0.5rem 0.50rem;border-radius:9999px;background-color:#F5F5F4;border-bottom:3px solid #A8A29E;color:#1F2937;text-decoration:none;display:inline-flex;align-items:center;gap:0.25rem;">
+        <a href="https://wa.me/2347058749114" style="min-width:8rem;padding:0.5rem 0.50rem;border-radius:9999px;background-color:#F5F5F4;border-bottom:3px solid #A8A29E;color:#1F2937;text-decoration:none;display:inline-flex;align-items:center;gap:0.25rem;">
           <span>Get in Touch</span>
           <span>➜</span>
         </a>

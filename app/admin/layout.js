@@ -3,13 +3,13 @@
 import AdminNav from '@/components/Admin/AdminNav';
 import { SessionProvider } from 'next-auth/react';
 
-export default function RootLayout({ children }) {
+export default function AdminLayout({ children }) {
   return (
     <SessionProvider>
-      <body>
+      <div className="min-h-screen flex flex-col">
         <AdminNav />
-        {children}
-      </body>
+        <main className="flex-1">{children}</main>
+      </div>
     </SessionProvider>
   );
 }

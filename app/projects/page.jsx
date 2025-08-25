@@ -26,59 +26,59 @@ export default async function ProjectGallery() {
   const localProjects = [
     {
       image: "/Nproj/ClassyL4.jpg",
-      description: "Contemporary building showcasing modern architectural design",
+      description: "",
     },
     {
       image: "/Nproj/LVChairSet2.jpg",
-      description: "Elegantly designed living space with modern furnishings",
+      description: "",
     },
     {
       image: "/Nproj/Pbed2.jpg",
-      description: "Spacious commercial kitchen featuring efficient layout",
-    },
-    {
-      image: "/Nproj/Kitchen.jpg",
-      description: "Comfortable reception area designed for relaxation",
-    },
-    {
-      image: "/Nproj/Pjs.jpg",
       description: "Luxurious master bedroom with premium furnishings",
     },
     {
+      image: "/Nproj/Kitchen.jpg",
+      description: "",
+    },
+    {
+      image: "/Nproj/Pjs.jpg",
+      description: "",
+    },
+    {
       image: "/Nproj/Pjs1.jpg",
-      description: "Landscaped pathway through residential grounds",
+      description: "",
     },
     {
       image: "/projects/turant2.jpg",
-      description: "Sleek duplex design with modern amenities",
+      description: "",
     },
     {
       image: "/Nproj/JpTvConsole.jpg",
-      description: "Stylishly decorated bedroom with attention to detail",
+      description: "",
     },
     {
       image: "/projects/turant1.jpg",
-      description: "Multi-purpose space combining parking and fitness area",
+      description: "",
     },
     {
       image: "/Nproj/Pjs5.jpg",
-      description: "Contemporary living room with elegant furnishings",
+      description: "",
     },
     {
       image: "/Nproj/Pjs6.jpg",
-      description: "Striking duplex exterior with modern architecture",
+      description: "",
     },
     {
       image: "/Nproj/Plounge1.jpg",
-      description: "Inviting outdoor dining space",
+      description: "",
     },
     {
       image: "/Nproj/ClassyL2.jpg",
-      description: "Professional office space with contemporary design",
+      description: "",
     },
     {
       image: "/Nproj/ClassyL2.jpg",
-      description: "Professional office space with contemporary design",
+      description: "",
     },
   ];
 

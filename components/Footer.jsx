@@ -73,7 +73,7 @@ const Footer = () => {
             </h4>
             <div className="space-y-3 max-md:flex flex-col items-center justify-center">
               <Link
-                href={"tel:08123444463"}
+                href={"tel:07058749114"}
                 className="flex items-center space-x-3 group w-fit"
               >
                 <FaPhone className="text-green-800" />
