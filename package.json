@@ -23,7 +23,7 @@
     "mongoose": "^8.16.4",
     "next": "15.3.5",
     "next-auth": "^4.24.11",
-    "nodemailer": "^7.0.5",
+    "nodemailer": "^6.9.11",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
