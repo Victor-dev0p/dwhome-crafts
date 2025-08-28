@@ -1,11 +1,16 @@
 // app/admin/testimonials/page.jsx
-import { connectToDB } from '@/lib/mongodb';
-import Testimonial from '@/lib/models/Testimonial';
 import TestimonialForm from '@/components/Admin/TestimonialForm';
 
+async function getTestimonials() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonial`, {
+    cache: "no-store", // so it always fetches fresh data
+  });
+  if (!res.ok) throw new Error("Failed to fetch testimonials");
+  return res.json();
+}
+
 export default async function TestimonialsPage() {
-  await connectToDB();
-  const testimonials = await Testimonial.find().sort({ createdAt: -1 }).lean();
+  const testimonials = await getTestimonials();
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6">
