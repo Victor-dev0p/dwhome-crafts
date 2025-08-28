@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const heroImages = [
-  "/Hero 1.jpg",
+  "/Her01.jpg",
   "/Hero2.jpg",
   "/Hero3.jpg", // Add as many as you want
 ];

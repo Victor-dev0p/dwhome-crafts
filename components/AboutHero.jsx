@@ -1,3 +1,4 @@
+// AboutHero
 'use client';
 import { motion } from 'framer-motion';
 
@@ -8,7 +9,7 @@ const AboutHero = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/hero-bg.jpg')" // Replace with your actual image path
+          backgroundImage: "url('/Nproj/ClassyL4.jpg')" // Replace with your actual image path
         }}
       />
 
