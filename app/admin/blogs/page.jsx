@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import BlogForm from '@/components/admin/BlogForm';
+import BlogForm from '@/components/Admin/BlogForm';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 
 export default function AdminBlogPage() {
