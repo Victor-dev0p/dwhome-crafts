@@ -52,7 +52,7 @@ const initializeTransporter = () => {
     const transporter = nodemailer.createTransport({
       host: emailHost,
       port: parseInt(emailPort, 10),
-      secure: true, // Use SSL for port 465
+      secure: parseInt(emailPort, 10) === 465, // true for 465, false for 587
       auth: {
         user: emailUser,
         pass: emailPass,
@@ -60,7 +60,11 @@ const initializeTransporter = () => {
       // Add these for better Gmail compatibility
       tls: {
         rejectUnauthorized: false
-      }
+      },
+      // Add connection timeout
+      connectionTimeout: 10000, // 10 seconds
+      greetingTimeout: 5000, // 5 seconds
+      socketTimeout: 10000, // 10 seconds
     });
 
     console.log("✅ Email transporter initialized successfully");
@@ -82,56 +86,90 @@ async function sendEmails(quote) {
   try {
     console.log("📧 Preparing to send emails for quote:", quote._id);
 
-    // Admin Notification
-    console.log("📧 Sending admin notification...");
-    await transporter.sendMail({
-      from: `"Quote Bot" <${process.env.EMAIL_USER}>`,
-      to: process.env.ADMIN_EMAIL,
-      subject: 'New Quote Request',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9;">
-          <h2>New Quote Received</h2>
-          <ul style="list-style: none; padding: 0;">
-            <li><strong>Name:</strong> ${quote.name}</li>
-            <li><strong>Email:</strong> ${quote.email}</li>
-            <li><strong>Service:</strong> ${quote.service}</li>
-            <li><strong>Project Details:</strong> ${quote.projectDetails}</li>
-            <li><strong>Budget:</strong> ${quote.currency} ${quote.budgetRaw.toLocaleString()}</li>
-            <li><strong>Message:</strong> ${quote.message || 'N/A'}</li>
-          </ul>
-          <p style="font-size: 12px; color: #666;">– DwHome & Crafts Team</p>
-        </div>
-      `,
-    });
-    console.log("✅ Admin notification sent for quote:", quote._id);
+    // Set a timeout for the entire email process
+    const emailPromise = Promise.race([
+      sendEmailsWithTimeout(quote),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Email timeout after 25 seconds')), 25000)
+      )
+    ]);
 
-    // Client Confirmation
-    console.log("📧 Sending client confirmation...");
-    await transporter.sendMail({
-      from: `"DwHome & Crafts" <${process.env.EMAIL_USER}>`,
-      to: quote.email,
-      subject: 'Quote Received - DwHome & Crafts',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9;">
-          <h2 style="color: #333;">Thank You for Your Quote Request</h2>
-          <p>Hi ${quote.name},</p>
-          <p>Thank you for reaching out about your <strong>${quote.service}</strong> project. We've received your request and will get back to you within 24-48 hours with a detailed quote.</p>
-          <div style="background: #fff; padding: 15px; border-radius: 5px; margin: 20px 0;">
-            <h3>Your Request Summary:</h3>
-            <p><strong>Service:</strong> ${quote.service}</p>
-            <p><strong>Budget Range:</strong> ${quote.currency} ${quote.budgetRaw.toLocaleString()}</p>
-          </div>
-          <p>If you have any urgent questions, please don't hesitate to contact us.</p>
-          <p>Best regards,<br/>– DwHome & Crafts Team</p>
-        </div>
-      `,
-    });
-    console.log("✅ Client confirmation sent to:", quote.email);
+    await emailPromise;
   } catch (mailError) {
     console.error("❌ Email sending failed:", mailError);
     console.error("Full email error:", mailError.message);
     // Don't throw error - let quote submission succeed even if email fails
   }
+}
+
+async function sendEmailsWithTimeout(quote) {
+  // Admin Notification
+  console.log("📧 Sending admin notification...");
+  const adminEmail = await transporter.sendMail({
+    from: `"Quote Bot" <${process.env.EMAIL_USER}>`,
+    to: process.env.ADMIN_EMAIL,
+    subject: 'New Quote Request',
+    text: `New Quote Received
+    
+Name: ${quote.name}
+Email: ${quote.email}
+Service: ${quote.service}
+Project Details: ${quote.projectDetails}
+Budget: ${quote.currency} ${quote.budgetRaw.toLocaleString()}
+Message: ${quote.message || 'N/A'}
+
+– DwHome & Crafts Team`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9;">
+        <h2>New Quote Received</h2>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Name:</strong> ${quote.name}</li>
+          <li><strong>Email:</strong> ${quote.email}</li>
+          <li><strong>Service:</strong> ${quote.service}</li>
+          <li><strong>Project Details:</strong> ${quote.projectDetails}</li>
+          <li><strong>Budget:</strong> ${quote.currency} ${quote.budgetRaw.toLocaleString()}</li>
+          <li><strong>Message:</strong> ${quote.message || 'N/A'}</li>
+        </ul>
+        <p style="font-size: 12px; color: #666;">– DwHome & Crafts Team</p>
+      </div>
+    `,
+  });
+  console.log("✅ Admin notification sent:", adminEmail.messageId);
+
+  // Client Confirmation
+  console.log("📧 Sending client confirmation...");
+  const clientEmail = await transporter.sendMail({
+    from: `"DwHome & Crafts" <${process.env.EMAIL_USER}>`,
+    to: quote.email,
+    subject: 'Quote Received - DwHome & Crafts',
+    text: `Hi ${quote.name},
+
+Thank you for reaching out about your ${quote.service} project. We've received your request and will get back to you within 24-48 hours with a detailed quote.
+
+Your Request Summary:
+Service: ${quote.service}
+Budget Range: ${quote.currency} ${quote.budgetRaw.toLocaleString()}
+
+If you have any urgent questions, please don't hesitate to contact us.
+
+Best regards,
+– DwHome & Crafts Team`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9;">
+        <h2 style="color: #333;">Thank You for Your Quote Request</h2>
+        <p>Hi ${quote.name},</p>
+        <p>Thank you for reaching out about your <strong>${quote.service}</strong> project. We've received your request and will get back to you within 24-48 hours with a detailed quote.</p>
+        <div style="background: #fff; padding: 15px; border-radius: 5px; margin: 20px 0;">
+          <h3>Your Request Summary:</h3>
+          <p><strong>Service:</strong> ${quote.service}</p>
+          <p><strong>Budget Range:</strong> ${quote.currency} ${quote.budgetRaw.toLocaleString()}</p>
+        </div>
+        <p>If you have any urgent questions, please don't hesitate to contact us.</p>
+        <p>Best regards,<br/>– DwHome & Crafts Team</p>
+      </div>
+    `,
+  });
+  console.log("✅ Client confirmation sent:", clientEmail.messageId);
 }
 
 export async function POST(request) {
