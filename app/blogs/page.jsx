@@ -1,5 +1,6 @@
 // app/blogs/page.jsx - FIXED VERSION
 import Link from "next/link";
+import BlogImage from "@/components/BlogImage"; // Import the Client Component
 
 export default async function BlogListPage() {
   // Use the same environment variable as your other pages
@@ -61,16 +62,12 @@ export default async function BlogListPage() {
               key={blog._id}
               className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden flex flex-col"
             >
-              {/* Blog Image */}
+              {/* Blog Image - Now using Client Component */}
               {blog.image?.data && (
-                <img
+                <BlogImage
                   src={`data:${blog.image.contentType};base64,${blog.image.data}`}
                   alt={blog.title}
                   className="h-48 w-full object-cover"
-                  onError={(e) => {
-                    console.error('Blog image failed to load for:', blog.title);
-                    e.target.style.display = 'none';
-                  }}
                 />
               )}
 
