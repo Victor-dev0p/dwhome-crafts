@@ -45,7 +45,7 @@ const initializeTransporter = () => {
   }
 
   try {
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       port: 465,
       secure: true, // true for 465

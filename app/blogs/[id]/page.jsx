@@ -1,3 +1,4 @@
+//app/blogs/[id]/page.jsx
 import { connectToDB } from "@/lib/mongodb";
 import Blog from "@/lib/models/Blog";
 import { notFound } from "next/navigation";
