@@ -99,3 +99,31 @@ export default async function BlogPostPage({ params }) {
     </div>
   );
 }
+
+// Generate metadata
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  
+  try {
+    await connectToDB();
+    const blog = await Blog.findById(resolvedParams.id)
+      .select("title excerpt")
+      .lean();
+
+    if (!blog) {
+      return {
+        title: 'Blog Post Not Found',
+      };
+    }
+
+    return {
+      title: blog.title,
+      description: blog.excerpt || 'Read this blog post on DwHome & Crafts',
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Blog Post - DwHome & Crafts',
+    };
+  }
+}
