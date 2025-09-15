@@ -1,3 +1,4 @@
+//components/QuoteForm
 'use client';
 import { useEffect, useState } from 'react';
 import {
@@ -162,11 +163,11 @@ export default function QuoteForm() {
               className="border p-2 rounded w-full"
             >
               <option value="">Select a service</option>
-              <option value="Website Design">Website Design</option>
-              <option value="Web App Development">Web App Development</option>
-              <option value="E-commerce">E-commerce</option>
-              <option value="Branding">Branding</option>
-              <option value="SEO">SEO</option>
+              <option value="Home Design & Furnishing">Home Design & Furnishing</option>
+              <option value="Hotel furnishing & Renovation">Hotel furnishing & Renovation</option>
+              <option value="Minimalistic Home Design">Minimalistic Home & Office Design</option>
+              <option value="BLounge & Resturants furnishing">Lounge & Resturants furnishing</option>
+              <option value="School & Churches">School & Churches</option>
               <option value="Maintenance">Maintenance</option>
             </select>
           </InputWrapper>

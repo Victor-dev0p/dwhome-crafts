@@ -5,11 +5,14 @@ import Image from "next/image";
 import AuthorMeta from "@/components/Admin/AuthorMeta";
 
 export default async function BlogPostPage({ params }) {
+  // Await params before using its properties
+  const resolvedParams = await params;
+  
   await connectToDB();
 
   let blog;
   try {
-    blog = await Blog.findById(params.id)
+    blog = await Blog.findById(resolvedParams.id)
       .select("title content excerpt image author createdAt")
       .lean();
   } catch (error) {
