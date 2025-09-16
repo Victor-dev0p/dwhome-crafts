@@ -9,7 +9,7 @@ const AboutHero = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/Nproj/ClassyL4.jpg')" // Replace with your actual image path
+          backgroundImage: "url('/Nproj/ClassyL4.jpg')" 
         }}
       />
 
@@ -28,7 +28,7 @@ const AboutHero = () => {
         </h1>
 
         <p className="text-lg md:text-xl max-w-2xl mx-auto text-[#C2FFC7] mb-8">
-          At DW Home Crafts, we blend style, comfort, and craftsmanship to build interiors that speak your language.
+          At DwHome & Crafts, we blend style, comfort, and craftsmanship to build interiors that speak your language.
         </p>
 
         <a

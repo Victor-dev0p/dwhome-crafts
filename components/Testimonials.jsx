@@ -6,83 +6,71 @@ import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
 import { MdFormatQuote } from "react-icons/md";
 import Statts from "@/components/Statts";
 
-/** ---- Hardcoded testimonials (exactly your 8) ---- */
+/** ---- Hardcoded testimonials (fixed image paths) ---- */
 const hardcodedTestimonials = [
   {
-    name: "John Davidson",
-    text: "Brooklyn & Bronx transformed our home beyond our wildest dreams...",
+    name: "Michael Akeja",
+    text: "Dwhome & Crafts transformed our home beyond our wildest dreams...",
     location: "Abuja Resident",
     project: "Complete Home Renovation",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/tee.jpg",
   },
   {
-    name: "Sarah Martinez",
-    text: "The renovation work was absolutely incredible...",
+    name: "Alhaji Mohiz",
+    text: "Their work on every space in my complex was remarkable...",
     location: "Commercial Client",
-    project: "Office Complex Renovation",
+    project: "Office Complex Furnishing",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/mohiz.jpg",
   },
   {
-    name: "Chief Adebayo Ogundimu",
-    text: "From concept to completion, Brooklyn & Bronx delivered excellence...",
-    location: "Lagos State",
-    project: "Luxury Estate Development",
+    name: "Chief Oseni",
+    text: "From concept to completion, Dwhome & Crafts delivered excellence...",
+    location: "Edo State",
+    project: "Luxury Estate Design",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/c.oseni.jpg",
   },
   {
-    name: "Mrs. Fatima Ibrahim",
+    name: "Alhaja. Jasmine Jatau",
     text: "Working with this team was a pleasure from start to finish...",
-    location: "Kano State",
+    location: "Kogi State",
     project: "Shopping Complex Construction",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/alhaja.jpg",
   },
   {
-    name: "Dr. Michael Okafor",
-    text:
-      "The structural integrity and architectural beauty of our medical facility...",
-    location: "Enugu State",
-    project: "Medical Facility Construction",
+    name: "Dr. Grace Agu",
+    text: "Every piece of furnishing speaks comforts and care for health...",
+    location: "Abia State",
+    project: "Medical Facility Furnishing",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/hilo.jpg",
   },
   {
-    name: "Engineer Blessing Okoro",
-    text:
-      "As a fellow engineer, I was impressed by their technical expertise...",
-    location: "Rivers State",
-    project: "Infrastructure Development",
+    name: "Architect Oluwaseun",
+    text: "As an architectural design expert, I was impressed by their technical expertise and attention to details...",
+    location: "Delta State",
+    project: "House of Assembly",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/seun.jpg",
   },
   {
-    name: "Architect Kemi Adeleke",
-    text:
-      "Their ability to bring architectural visions to life is remarkable...",
-    location: "Oyo State",
-    project: "Residential Complex",
+    name: "Chef Eucharia Ukhabi",
+    text: "Their ability to bring architectural visions to life is remarkable...",
+    location: "Edo State",
+    project: "Lounge Walk in Kitchen",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/chef.jpg",
   },
   {
-    name: "Mr. Ahmed Bello",
-    text:
-      "Brooklyn & Bronx doesn't just build structures; they build dreams...",
-    location: "Kaduna State",
-    project: "Luxury Hotel Construction",
+    name: "Mr. Dantata Sani",
+    text: "Dwhome & Crafts doesn't just furnish spaces; they tell stories with art...",
+    location: "Kano State",
+    project: "Luxury Hotel Design",
     rating: 5,
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+    image: "/reviews/ikh.jpg",
   },
 ];
 
@@ -120,8 +108,7 @@ const Testimonials = () => {
     const cardWidth = firstCard?.offsetWidth || 360;
 
     const styles = window.getComputedStyle(el);
-    const gapPx =
-      parseInt(styles.columnGap || styles.gap || "24", 10) || 24;
+    const gapPx = parseInt(styles.columnGap || styles.gap || "24", 10) || 24;
 
     return cardWidth + gapPx;
   }, []);
@@ -138,20 +125,16 @@ const Testimonials = () => {
       // Smooth one-card slide
       el.scrollTo({ left: nextLeft, behavior: "smooth" });
 
-      // If we've reached (or nearly) the end when going forward, jump back instantly
-      // after the smooth scroll finishes (approx 500–700ms).
+      // Handle infinite scroll effect
       window.clearTimeout(timerRef.current);
       timerRef.current = window.setTimeout(() => {
         // recompute after scroll
         const card = el.querySelector("[data-card]");
         const cw = card?.offsetWidth || 360;
         const styles = window.getComputedStyle(el);
-        const gap =
-          parseInt(styles.columnGap || styles.gap || "24", 10) || 24;
+        const gap = parseInt(styles.columnGap || styles.gap || "24", 10) || 24;
 
-        const nearEnd =
-          el.scrollLeft + el.clientWidth >= el.scrollWidth - (cw + gap);
-
+        const nearEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - (cw + gap);
         const nearStart = el.scrollLeft <= 0 + 1; // tolerance
 
         if (dir > 0 && nearEnd) {
@@ -181,21 +164,51 @@ const Testimonials = () => {
     }
   }, [isPaused, testimonials.length, stepScroll]);
 
-  // Pause on any user interaction (hover, buttons, touch)
+  // Pause/resume handlers
   const pause = () => setIsPaused(true);
   const resume = () => setIsPaused(false);
 
+  // Admin handlers
   const handleEdit = (t) => console.log("Edit:", t);
+  
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this testimonial?")) return;
     try {
       const res = await fetch(`/api/testimonials/${id}`, { method: "DELETE" });
-      if (res.ok) setTestimonials((prev) => prev.filter((x) => x._id !== id));
+      if (res.ok) {
+        setTestimonials((prev) => prev.filter((x) => x._id !== id));
+      } else {
+        console.error("Delete request failed");
+      }
     } catch (e) {
-      console.error("Delete failed", e);
+      console.error("Delete failed:", e);
     }
   };
 
+  // Helper function to get correct image source
+  const getImageSrc = (image) => {
+    if (!image) return "/reviews/default-avatar.jpg"; // fallback image
+    
+    // External URL (http/https) or base64 data
+    if (image.startsWith("http") || image.startsWith("data:image")) {
+      return image;
+    }
+    
+    // Local file path
+    if (image.startsWith("/")) {
+      return image; // Already has leading slash
+    }
+    
+    // Base64 data without data: prefix
+    if (image.length > 100 && !image.includes("/") && !image.includes(".")) {
+      return `data:image/jpeg;base64,${image}`;
+    }
+    
+    // Relative path - add leading slash
+    return `/${image}`;
+  };
+
+  // Render star rating
   const renderStars = (rating = 5) =>
     Array.from({ length: 5 }, (_, i) => (
       <FiStar
@@ -205,7 +218,7 @@ const Testimonials = () => {
       />
     ));
 
-  const testimonialStatts = [
+  const testimonialStats = [
     { number: "98%", label: "Client Satisfaction" },
     { number: "50+", label: "Happy Clients" },
     { number: "100%", label: "Project Completion" },
@@ -229,33 +242,33 @@ const Testimonials = () => {
           <div className="w-20 h-1 bg-[#143c2d] mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Don't just take our word for it. Here's what our satisfied clients across Nigeria
-            have to say about their experience working with Brooklyn & Bronx.
+            have to say about their experience working with Dwhome & Crafts.
           </p>
         </motion.div>
 
-        {/* Top-right controls */}
+        {/* Navigation Controls */}
         <div
           className="flex justify-center gap-3 mb-4"
           onMouseEnter={pause}
           onMouseLeave={resume}
         >
           <button
-            aria-label="Previous"
+            aria-label="Previous testimonial"
             onClick={() => stepScroll(-1)}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#143c2d] hover:text-white transition"
+            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#143c2d] hover:text-white hover:border-[#143c2d] transition-all duration-300"
           >
             <FiChevronLeft size={20} />
           </button>
           <button
-            aria-label="Next"
+            aria-label="Next testimonial"
             onClick={() => stepScroll(1)}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#143c2d] hover:text-white transition"
+            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#143c2d] hover:text-white hover:border-[#143c2d] transition-all duration-300"
           >
             <FiChevronRight size={20} />
           </button>
         </div>
 
-        {/* Carousel */}
+        {/* Carousel Container */}
         <div className="relative">
           <div
             ref={carouselRef}
@@ -266,63 +279,70 @@ const Testimonials = () => {
             className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
             style={{ scrollSnapType: "x mandatory" }}
           >
-            {testimonials.map((t, idx) => (
+            {testimonials.map((testimonial, idx) => (
               <motion.div
-                key={idx}
+                key={`${testimonial.name}-${idx}`}
                 data-card
                 className="
                   flex-shrink-0 scroll-snap-align-start
                   w-[88vw] sm:w-[60vw] md:w-[45vw] lg:w-[32%] xl:w-[30%]
                   min-w-[280px] max-w-[420px]
                   bg-gray-800 rounded-2xl p-8 shadow-lg relative
+                  hover:shadow-xl transition-shadow duration-300
                 "
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
                 whileHover={{ scale: 1.02 }}
               >
+                {/* Quote Icon */}
                 <div className="absolute top-6 right-6 text-green-800/20">
                   <MdFormatQuote size={48} />
                 </div>
 
+                {/* Client Info */}
                 <div className="flex items-center mb-6">
-                  <img
-                    src={
-                      t.image?.startsWith("http") || t.image?.startsWith("data:image")
-                        ? t.image
-                        : `data:image/jpeg;base64,${t.image}`
-                    }
-                    alt={t.name}
-                    className="w-16 h-16 rounded-full object-cover border-3 border-green-800 mr-4"
-                  />
+                  <div className="relative">
+                    <img
+                      src={getImageSrc(testimonial.image)}
+                      alt={`${testimonial.name} testimonial`}
+                      className="w-16 h-16 rounded-full object-cover border-3 border-green-800 mr-4"
+                      onError={(e) => {
+                        e.target.src = "/reviews/default-avatar.jpg"; // Fallback on error
+                      }}
+                    />
+                  </div>
                   <div>
-                    <h4 className="text-white font-bold text-lg">{t.name}</h4>
-                    <p className="text-gray-400 text-sm">{t.location}</p>
-                    <p className="text-green-600 text-xs font-medium">{t.project}</p>
+                    <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
+                    <p className="text-gray-400 text-sm">{testimonial.location}</p>
+                    <p className="text-green-600 text-xs font-medium">{testimonial.project}</p>
                   </div>
                 </div>
 
+                {/* Rating */}
                 <div className="flex items-center gap-1 mb-4">
-                  {renderStars(t.rating)}
+                  {renderStars(testimonial.rating)}
                 </div>
 
+                {/* Testimonial Text */}
                 <blockquote className="text-gray-200 text-base leading-relaxed italic relative z-10">
-                  "{t.text}"
+                  "{testimonial.text}"
                 </blockquote>
 
+                {/* Admin Controls */}
                 {isAdmin && (
-                  <div className="flex gap-2 mt-4">
+                  <div className="flex gap-2 mt-4 pt-4 border-t border-gray-700">
                     <button
-                      onClick={() => handleEdit(t)}
-                      className="text-sm text-yellow-400 underline hover:text-yellow-300"
+                      onClick={() => handleEdit(testimonial)}
+                      className="text-sm text-yellow-400 underline hover:text-yellow-300 transition-colors"
                     >
                       Edit
                     </button>
-                    {t._id && (
+                    {testimonial._id && (
                       <button
-                        onClick={() => handleDelete(t._id)}
-                        className="text-sm text-red-500 underline hover:text-red-400"
+                        onClick={() => handleDelete(testimonial._id)}
+                        className="text-sm text-red-500 underline hover:text-red-400 transition-colors"
                       >
                         Delete
                       </button>
@@ -333,14 +353,14 @@ const Testimonials = () => {
             ))}
           </div>
 
-          {/* soft edge fades */}
+          {/* Gradient fade edges */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white/90 to-transparent" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white/90 to-transparent" />
         </div>
 
-        {/* Statistics (unchanged) */}
+        {/* Statistics Section */}
         <Statts
-          statts={testimonialStatts}
+          statts={testimonialStats}
           containerClass="bg-[#143c2d] mt-16"
           numberClass="text-3xl md:text-4xl text-white"
           labelClass="text-sm md:text-base text-[#71C0BB]"

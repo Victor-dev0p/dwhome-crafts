@@ -16,7 +16,7 @@ const Page = () => {
         {/* Contact Image */}
         <div className="rounded-lg overflow-hidden shadow-xl">
           <img
-            src="/contact.jpg"
+            src="/ads/serteam.jpg"
             alt="Our customer service team"
             className="w-full h-auto"
           />
@@ -51,7 +51,7 @@ const Page = () => {
                   href={"mailto:brooklynandbronxco@gmail.com"}
                   className="text-gray-600 max-md:text-sm"
                 >
-                  dwhomecraft@gmail.com
+                  dwhomecrafts@gmail.com
                 </Link>
               </div>
             </div>

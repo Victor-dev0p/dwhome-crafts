@@ -42,19 +42,19 @@ export default function ProjectGallery() {
           console.log('DB Projects:', dbProjects);
 
           const localProjects = [
-            { image: "/Nproj/ClassyL4.jpg", description: "" },
-            { image: "/Nproj/LVChairSet2.jpg", description: "" },
+            { image: "/Nproj/ClassyL4.jpg", description: "Adorningly crafted set of tables and chairs for a lounge" },
+            { image: "/Nproj/LVChairSet2.jpg", description: "Beautiful masterpiece of a waiting room couch" },
             { image: "/Nproj/Pbed2.jpg", description: "Luxurious master bedroom with premium furnishings" },
-            { image: "/Nproj/Kitchen.jpg", description: "" },
-            { image: "/Nproj/Pjs.jpg", description: "" },
-            { image: "/Nproj/Pjs1.jpg", description: "" },
-            { image: "/projects/turant2.jpg", description: "" },
-            { image: "/Nproj/JpTvConsole.jpg", description: "" },
-            { image: "/projects/turant1.jpg", description: "" },
-            { image: "/Nproj/Pjs5.jpg", description: "" },
-            { image: "/Nproj/Pjs6.jpg", description: "" },
-            { image: "/Nproj/Plounge1.jpg", description: "" },
-            { image: "/Nproj/ClassyL2.jpg", description: "" },
+            { image: "/Nproj/kit-win.png", description: "Highly sophisticated walk in kitchen" },
+            { image: "/Nproj/recep.jpg", description: "Side view of an artistic design for a hotel reception " },
+            { image: "/Nproj/deluxee.jpg", description: "Captivating fresh look of a super deluxe room in a hotel" },
+            { image: "/projects/turant2.jpg", description: "Refreshing sight of a well furnished resturant" },
+            { image: "/Nproj/console.jpg", description: "Satisfactory view from client's lens of a well design Tv console" },
+            { image: "/Nproj/recep11.jpg", description: "Front view of a beautiful hotel reception furnished to taste" },
+            { image: "/Nproj/SV.webp", description: "Minimalistic design of an office with state of the art furnishing" },
+            { image: "/Nproj/Pjs1.jpg", description: "Side view of a men's club boardroom" },
+            { image: "/Nproj/Plounge1.jpg", description: "Open view of an exquistive furnished longue " },
+            { image: "/Nproj/exclusive.jpg", description: "Executive room for exclusive members of a club" },
           ];
 
           setProjects([...localProjects, ...dbProjects]);
