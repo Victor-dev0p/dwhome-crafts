@@ -1,7 +1,5 @@
-//app/admin/layout.js
 'use client';
 
-// import AdminNav from '@/components/Admin/AdminNav';
 import { SessionProvider } from 'next-auth/react';
 
 export default function AdminLayout({ children }) {
