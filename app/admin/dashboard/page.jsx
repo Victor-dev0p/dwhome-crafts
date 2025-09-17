@@ -1,7 +1,9 @@
+//app/admin/dashboard/page.jsx
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { connectToDB } from '@/lib/mongodb';
+import AdminNav from '@/components/Admin/AdminNav';
 import Project from '@/lib/models/Project';
 import Blog from '@/lib/models/Blog';
 import Testimonial from '@/lib/models/Testimonial';
@@ -85,6 +87,7 @@ export default async function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-6 overflow-x-hidden">
+      <AdminNav />
       <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
         <LayoutDashboard className="w-7 h-7" />
         Admin Dashboard
